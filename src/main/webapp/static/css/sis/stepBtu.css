@@ -1,0 +1,19 @@
+/*
+页面下方按钮样式*/
+
+.stepBtu{
+    position: absolute;
+    top:900px;
+    left: 50px;
+}
+
+.indexBtu{
+    position: absolute;
+    top:900px;
+    left: 984px;
+}
+.printBtu{
+    position: absolute;
+    top:750px;
+    left: 510px;
+}

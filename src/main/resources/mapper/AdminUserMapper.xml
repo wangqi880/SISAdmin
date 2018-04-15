@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sis.dao.AdminUserMapper" >
+
+    <resultMap id="adminUser" type="com.sis.model.AdminUser" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="msisdn" property="msisdn" jdbcType="VARCHAR" />
+        <result column="insertTime" property="insertTime" jdbcType="VARCHAR" />
+        <result column="updateTime" property="updateTime" jdbcType="VARCHAR" />
+        <result column="role" property="role" jdbcType="VARCHAR" />
+    </resultMap>
+
+
+    <select id="chooseUserNum" resultType="java.lang.Integer">
+        select count(1) from t_admin_user t where t.role='2'
+    </select>
+    <insert id="add" parameterType="com.sis.model.AdminUser">
+        insert into t_admin_user(id,username,password,name,msisdn,insertTime,updateTime,role) values(#{id},#{username},#{password},#{name},#{msisdn},#{insertTime},#{updateTime},#{role})
+    </insert>
+    <select id="queryByUsername" parameterType="string" resultMap="adminUser">
+        select  * from t_admin_user  t where t.username = #{username}
+    </select>
+
+    <update id="update" parameterType="com.sis.model.AdminUser">
+        UPDATE t_admin_user
+        SET
+        `password` = #{password},
+        `name` = #{name},
+        `msisdn` = #{msisdn},
+        `updateTime` = #{updateTime},
+        `role` = #{role}
+        WHERE username = #{username}
+    </update>
+    <select id="queryChooseUsers" resultMap="adminUser">
+        select * from t_admin_user t where t.role='2'
+    </select>
+
+    <select id="queryByLogin" parameterType="map" resultMap="adminUser">
+        select * from t_admin_user where username=#{username} and password=#{password}
+    </select>
+    <select id="queryAll" resultMap="adminUser">
+        select * from t_admin_user;
+    </select>
+    <delete id="delete" parameterType="string">
+        delete from t_admin_user where id=#{id}
+    </delete>
+
+    <update id="updatePassword" parameterType="map">
+        UPDATE t_admin_user
+        SET
+        `password` = #{password}
+        WHERE id = #{userId}
+    </update>
+
+</mapper>

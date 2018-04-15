@@ -1,0 +1,122 @@
+/*棣栭〉鏍峰紡 */
+
+/*涓昏儗鏅�*/
+body{
+	background-image:url("../../img/background_index_old.png");
+	background-repeat: no-repeat;
+}
+html,body{
+	width:1280px;
+	height:1024px;
+}
+/*鍦堝嚭鐣岄潰澶у皬*/
+.main{
+	text-align: center;
+	width:1280px;
+	height:1024px;
+}
+/*鏃堕棿鏄剧ず*/
+
+.date{
+	font-size: 35px;
+	color: #8bc816;
+	letter-spacing: 12px;
+	left: 300px;
+	top:100px;
+	position: absolute;
+}
+
+/*鍥剧墖鎸夐挳*/
+#btu_baoming{
+	position: absolute;
+	left: 222px;
+	top:348px;
+}
+#btu_jiaofei{
+	position: absolute;
+	left: 680px;
+	top:348px;
+}
+#btu_chaxun{
+	position: absolute;
+	left: 222px;
+	top:535px;
+}
+#btu_dayin{
+	position: absolute;
+	left: 680px;
+	top:535px;
+}
+#btu_yuyue{
+	position: absolute;
+	left: 113.5px;
+	top: 651.5px;
+}
+#btu_cansai{
+	position: absolute;
+	left: 502.5px;
+	top: 651.5px;
+}
+#btu_chafeng{
+	position: absolute;
+	left: 113.5px;
+	top: 811.5px;
+}
+#btu_dazheng{
+	position: absolute;
+	left: 502.5px;
+	top: 811.5px;
+}
+
+/*绱犺川鎷撳睍*/
+.sztz{
+	border-top:2px solid #bbb;
+	border-left:2px solid #bbb;
+	box-shadow: 2px 2px 5px #bbb;
+	margin-left: 75px;
+	margin-top: 125px;
+	width: 1130px;
+	height: 355px;
+	border-radius: 15px;
+}
+.title_sztz{
+	width: 33%;
+}
+.title_sztz_text{
+	color: white;
+	list-style: none;
+	font-size: 120px;
+	margin-left: -35px;
+	font-family:鍗庢枃妤蜂綋;
+	margin-top: 27.5px;
+	line-height:140px;
+}
+
+/*娲诲姩姣旇禌*/
+.hdbs{
+	border-top:2px solid #bbb;
+	border-left:2px solid #bbb;
+	box-shadow: 2px 2px 5px #bbb;
+	margin-left: 75px;
+	margin-top: 20px;
+	width: 1130px;
+	height: 345px;
+	border-radius: 15px;
+}
+.title_hdbs{
+	width: 33%;
+	margin-left: 735px;
+}
+.title_hdbs_text{
+	color: white;
+	list-style: none;
+	font-size: 120px;
+	font-family:鍗庢枃妤蜂綋;
+	margin-top: 27.5px;
+	line-height:140px;
+}
+#lock{
+	position: absolute;
+	left:59px;
+	top:615px;
+}

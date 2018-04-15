@@ -1,0 +1,500 @@
+{
+	"id": "5f12b442-72f3-e821-cb44-98f2b99df5f4",
+	"name": "qsng",
+	"description": "",
+	"order": [
+		"55af2377-0a5a-6449-b736-e8f579d59c64",
+		"2811fd23-7665-f9a4-57fc-1b7ae8d29b9b",
+		"af246614-cf92-ab3a-5b20-bbc356f038fc",
+		"f3b5e3b3-5858-66fc-eee7-adaaadaeecb2",
+		"3287f007-b589-04aa-7044-3b07f7df44bc",
+		"f98a3072-d815-2b1b-d1f5-7ed0532ffbdc",
+		"4a503c05-805c-9f13-54e8-294269f3ea04",
+		"6e24dd01-f191-94b5-7624-537db534141a",
+		"392274d7-e860-a369-6aa2-39828ad4b4c3",
+		"483e023d-21b3-7851-4709-06e7054b86b2",
+		"dd179519-9745-3dd0-241e-37b4506adbfc"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1510379809664,
+	"owner": "2410443",
+	"public": false,
+	"requests": [
+		{
+			"id": "2811fd23-7665-f9a4-57fc-1b7ae8d29b9b",
+			"headers": "",
+			"headerData": [],
+			"url": "http://bm.cdqsng.com/app/api/gradeList.do?siteId=531B601029F97174012A0D3D396600B2",
+			"queryParams": [
+				{
+					"key": "siteId",
+					"value": "531B601029F97174012A0D3D396600B2",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1510881013122,
+			"name": "年龄段 gradeList",
+			"description": "",
+			"collectionId": "5f12b442-72f3-e821-cb44-98f2b99df5f4",
+			"responses": []
+		},
+		{
+			"id": "3287f007-b589-04aa-7044-3b07f7df44bc",
+			"headers": "",
+			"headerData": [],
+			"url": "http://bm.cdqsng.com/app/api/weekList.do?siteId=531B601029F97174012A0D3D396600B2",
+			"queryParams": [
+				{
+					"key": "siteId",
+					"value": "531B601029F97174012A0D3D396600B2",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1510846500206,
+			"name": "时间段 weekList",
+			"description": "",
+			"collectionId": "5f12b442-72f3-e821-cb44-98f2b99df5f4",
+			"responses": []
+		},
+		{
+			"id": "392274d7-e860-a369-6aa2-39828ad4b4c3",
+			"headers": "",
+			"headerData": [],
+			"url": "http://bm.cdqsng.com/app/api/studentClazzList.do?siteId=531B601029F97174012A0D3D396600B2&studentId=1047D73FA58578BBE0530100007F11D0&keyWords&status",
+			"queryParams": [
+				{
+					"key": "siteId",
+					"value": "531B601029F97174012A0D3D396600B2",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "studentId",
+					"value": "1047D73FA58578BBE0530100007F11D0",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "keyWords",
+					"value": "",
+					"equals": false,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "status",
+					"value": "",
+					"equals": false,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "pageNo",
+					"value": "2",
+					"equals": true,
+					"description": "",
+					"enabled": false
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1510846496139,
+			"name": "学生报名班级信息 studentClazzList",
+			"description": "",
+			"collectionId": "5f12b442-72f3-e821-cb44-98f2b99df5f4",
+			"responses": []
+		},
+		{
+			"id": "483e023d-21b3-7851-4709-06e7054b86b2",
+			"headers": "",
+			"headerData": [],
+			"url": "http://bm.cdqsng.com/app/api/studentClazzView.do?siteId=531B601029F97174012A0D3D396600B2&studentId=1047D73FA58578BBE0530100007F11D0&reserveNo=cd256804",
+			"queryParams": [
+				{
+					"key": "siteId",
+					"value": "531B601029F97174012A0D3D396600B2",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "studentId",
+					"value": "1047D73FA58578BBE0530100007F11D0",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "reserveNo",
+					"value": "cd256804",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1510881010761,
+			"name": "学生报名班级详情 studentClazzView",
+			"description": "",
+			"collectionId": "5f12b442-72f3-e821-cb44-98f2b99df5f4",
+			"responses": []
+		},
+		{
+			"id": "4a503c05-805c-9f13-54e8-294269f3ea04",
+			"headers": "",
+			"headerData": [],
+			"url": "http://bm.cdqsng.com/app/api/clazzView.do?siteId=531B601029F97174012A0D3D396600B2&id=32B2A9B9C6DC085FE055000000000001",
+			"queryParams": [
+				{
+					"key": "siteId",
+					"value": "531B601029F97174012A0D3D396600B2",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "id",
+					"value": "32B2A9B9C6DC085FE055000000000001",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1510881009171,
+			"name": "课程详情 clazzView",
+			"description": "",
+			"collectionId": "5f12b442-72f3-e821-cb44-98f2b99df5f4",
+			"responses": []
+		},
+		{
+			"id": "55af2377-0a5a-6449-b736-e8f579d59c64",
+			"headers": "",
+			"headerData": [],
+			"url": "http://bm.cdqsng.com/app/api/areaList.do?siteId=531B601029F97174012A0D3D396600B2",
+			"queryParams": [
+				{
+					"key": "siteId",
+					"value": "531B601029F97174012A0D3D396600B2",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1510881008001,
+			"name": "机构区域 areaList",
+			"description": "",
+			"collectionId": "5f12b442-72f3-e821-cb44-98f2b99df5f4",
+			"responses": []
+		},
+		{
+			"id": "6e24dd01-f191-94b5-7624-537db534141a",
+			"headers": "",
+			"headerData": [],
+			"url": "http://bm.cdqsng.com/app/api/studentinfo.do?siteId=531B601029F97174012A0D3D396600B2&userName=戚军辉8&userMobile=13777464111&appKey=f58f9540c36111e7abc4cec278b6b50a",
+			"queryParams": [
+				{
+					"key": "siteId",
+					"value": "531B601029F97174012A0D3D396600B2",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "userName",
+					"value": "戚军辉8",
+					"equals": true,
+					"description": "真实姓名",
+					"enabled": true
+				},
+				{
+					"key": "userMobile",
+					"value": "13777464111",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "appKey",
+					"value": "f58f9540c36111e7abc4cec278b6b50a",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1510881011681,
+			"name": "学生信息 studentinfo",
+			"description": "",
+			"collectionId": "5f12b442-72f3-e821-cb44-98f2b99df5f4",
+			"responses": []
+		},
+		{
+			"id": "af246614-cf92-ab3a-5b20-bbc356f038fc",
+			"headers": "channel: 1025536\ntest: 00\n",
+			"headerData": [
+				{
+					"key": "channel",
+					"value": "1025536",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "test",
+					"value": "00",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://bm.cdqsng.com/app/api/specialtyList.do?siteId=531B601029F97174012A0D3D396600B2",
+			"queryParams": [
+				{
+					"key": "siteId",
+					"value": "531B601029F97174012A0D3D396600B2",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1510881012353,
+			"name": "专业分类 specialtyList",
+			"description": "",
+			"collectionId": "5f12b442-72f3-e821-cb44-98f2b99df5f4",
+			"responses": []
+		},
+		{
+			"id": "dd179519-9745-3dd0-241e-37b4506adbfc",
+			"headers": "",
+			"headerData": [],
+			"url": "http://bm.cdqsng.com/app/api/smsCode.do?siteId=531B601029F97174012A0D3D396600B2&studentId=5771B87B14984FAEB4F46CC9BC9D3AA0&smsCode=6666",
+			"queryParams": [
+				{
+					"key": "siteId",
+					"value": "531B601029F97174012A0D3D396600B2",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "studentId",
+					"value": "5771B87B14984FAEB4F46CC9BC9D3AA0",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "smsCode",
+					"value": "6666",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1510670542318,
+			"name": "验证码 smsCode",
+			"description": "",
+			"collectionId": "5f12b442-72f3-e821-cb44-98f2b99df5f4",
+			"responses": []
+		},
+		{
+			"id": "f3b5e3b3-5858-66fc-eee7-adaaadaeecb2",
+			"headers": "",
+			"headerData": [],
+			"url": "http://bm.cdqsng.com/app/api/termList.do?siteId=531B601029F97174012A0D3D396600B2",
+			"queryParams": [
+				{
+					"key": "siteId",
+					"value": "531B601029F97174012A0D3D396600B2",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1510881010048,
+			"name": "单位学期 termList",
+			"description": "",
+			"collectionId": "5f12b442-72f3-e821-cb44-98f2b99df5f4",
+			"responses": []
+		},
+		{
+			"id": "f98a3072-d815-2b1b-d1f5-7ed0532ffbdc",
+			"headers": "",
+			"headerData": [],
+			"url": "http://bm.cdqsng.com/app/api/clazzList.do?siteId=531B601029F97174012A0D3D396600B2&area=&term&spelId=&weekDay&grade&pageNo=1&clazzNo&keyWords",
+			"queryParams": [
+				{
+					"key": "siteId",
+					"value": "531B601029F97174012A0D3D396600B2",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "area",
+					"value": "",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "term",
+					"value": "",
+					"equals": false,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "spelId",
+					"value": "",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "weekDay",
+					"value": "",
+					"equals": false,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "grade",
+					"value": "",
+					"equals": false,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "pageNo",
+					"value": "1",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "clazzNo",
+					"value": "",
+					"equals": false,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "keyWords",
+					"value": "",
+					"equals": false,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1510901855426,
+			"name": "培训课程列表 clazzList",
+			"description": "",
+			"collectionId": "5f12b442-72f3-e821-cb44-98f2b99df5f4",
+			"responses": []
+		}
+	]
+}

@@ -1,0 +1,14 @@
+.main {
+	margin:0 auto;
+	margin-top: 6em;
+	width: 40em;
+	height: 20em;
+	border-radius:10px;
+	background:#CCCCCC;
+	opacity: 0.4;
+	filter: alpha(opacity = 50)
+}
+
+.main .container .row{
+	
+}

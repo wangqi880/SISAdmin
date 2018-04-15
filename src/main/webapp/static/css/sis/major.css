@@ -1,0 +1,146 @@
+/*棣栭〉鏍峰紡 */
+
+/*涓昏儗鏅�*/
+body{
+    background-image:url("../../img/major_back.png");
+    background-repeat: no-repeat;
+}
+/*鍦堝嚭鐣岄潰澶у皬*/
+html,body{
+	width:1280px;
+	height:1024px;
+}
+.main{
+    text-align: center;
+    width:1280px;
+    height:1024px;
+}
+/*鏃堕棿鏄剧ず*/
+.date{
+	font-size: 35px;
+	color: #8bc816;
+	letter-spacing: 12px;
+	left: 300px;
+	top:100px;
+	position: absolute;
+}
+/* 方案2 */
+#li_1_1{
+	position: absolute;
+	left: 100px;
+	top:250px;
+}
+#li_1_2{
+	position: absolute;
+	left: 395px;
+	top:250px;
+}
+#li_1_3{
+	position: absolute;
+	left: 690px;
+	top:250px;
+}
+#li_1_4{
+	position: absolute;
+	left: 985px;
+	top:250px;
+}
+
+#li_2_1{
+	position: absolute;
+	left: 329px;
+	top:410px;
+}
+#li_2_2{
+	position: absolute;
+	left: 690px;
+	top:410px;
+}
+#li_2_3{
+	position: absolute;
+	left: 985px;
+	top:410px;
+}
+#li_3_0{
+	position: absolute;
+	left: 395px;
+	top:570px;
+}
+#li_3_1{
+	position: absolute;
+	left: 690px;
+	top:570px;
+}
+#li_3_2{
+	position: absolute;
+	left: 985px;
+	top:570px;
+}
+
+#li_4_1{
+	position: absolute;
+	left:690px;
+	top:730px;
+}
+#li_4_2{
+	position: absolute;
+	left: 985px;
+	top:730px;
+}
+
+
+/*涓撲笟澶х被鍒楄〃*/
+.majorul{
+    list-style: none;
+    width: 1000px;
+    margin-left: 40px;
+}
+.major{
+    list-style: none;
+    widoth:100%;
+}
+.major li {
+    float:left;
+    line-height:150px;
+}
+#majorList_fir li {
+    margin-left:36px;
+}
+#majorList_sec{
+    margin-left: 244px;
+}
+
+#majorList_sec li {
+    margin-left:44px;
+}
+
+#majorList_thr{
+    margin-left: 412px;
+}
+
+#majorList_thr li {
+    margin-left:44px;
+}
+
+#majorList_foth{
+    margin-left: 480px;
+}
+
+#majorList_foth li {
+    margin-left:44px;
+}
+
+.majorList{
+    margin-top: 200px;
+    width: 100%;
+}
+.table{
+	text-align: center;
+}
+
+.table tr td{
+    height : 100px;
+    line-height : 100px;
+}
+
+

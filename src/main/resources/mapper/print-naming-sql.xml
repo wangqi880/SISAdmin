@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sis.dao.PrintDao">
+<insert id="recordPrint" parameterType="com.sis.model.PrintInfo">
+    insert into t_record_print(studentId, studentName, classId,oprTime) VALUES (#{studentId},#{studentName},#{classId},#{oprTime})
+</insert>
+
+<select id="getAllPrintCount" parameterType="string" resultType="Integer">
+  select count(1) from t_record_print t where t.studentId = #{studentId} and t.classId = #{classId}
+</select>
+
+<select id="getDayPrintCount" parameterType="string" resultType="Integer">
+  select count(1) from t_record_print t where t.studentId = #{studentId} and t.classId = #{classId} and t.oprTime=DATE_FORMAT(now(),'%Y%m%d')
+</select>
+</mapper>

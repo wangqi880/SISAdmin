@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sis.dao.CongfigMapper" >
+    <resultMap id="congfigPojo" type="com.sis.model.CongfigPojo" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="conf_key" property="configKey" jdbcType="VARCHAR" />
+        <result column="conf_value" property="configValue" jdbcType="VARCHAR" />
+        <result column="insertTime" property="insertTime" jdbcType="INTEGER" />
+        <result column="desc" property="desc" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="getConfigvalue"  parameterType="string" resultType="string" >
+        select conf_value from t_framework_conf where conf_key=#{key}
+    </select>
+
+    <select id="listAll" resultMap="congfigPojo">
+        select * from t_framework_conf
+    </select>
+    <insert id="add" parameterType="com.sis.model.CongfigPojo">
+        insert into t_framework_conf(conf_key,conf_value,insertTime,`desc`) values(#{configKey},#{configValue},#{insertTime},#{desc})
+    </insert>
+    <delete id="delelte" parameterType="string">
+        delete from t_framework_conf where id=#{id}
+    </delete>
+    <select id="queryById" parameterType="string" resultMap="congfigPojo">
+         select * from t_framework_conf where id=#{id}
+    </select>
+    <update id="update" parameterType="com.sis.model.CongfigPojo">
+        UPDATE `t_framework_conf`
+            SET
+            `conf_key` = #{configKey},
+            `conf_value` = #{configValue},
+            `insertTime` = #{insertTime},
+            `desc` = #{desc}
+        WHERE `id` = #{id};
+    </update>
+    <update id="updateByKeyAndValue" parameterType="map">
+         UPDATE `t_framework_conf`
+            SET
+            `conf_value` = #{conf_value}
+        WHERE `conf_key` = #{conf_key};
+    </update>
+</mapper>

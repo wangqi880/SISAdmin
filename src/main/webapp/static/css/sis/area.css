@@ -1,0 +1,46 @@
+/*棣栭〉鏍峰紡 */
+
+/*涓昏儗鏅�*/
+body{
+    background-image:url("../../img/background_index_old.png");
+    background-repeat: no-repeat;
+}
+html,body{
+    width:1280px;
+    height:1024px;
+}
+/*鍦堝嚭鐣岄潰澶у皬*/
+.main{
+    text-align: center;
+    width:1280px;
+    height:1024px;
+}
+/*鏃堕棿鏄剧ず*/
+.showDate{
+    margin-top: 60px;
+}
+.date{
+    font-size: 35px;
+    color: #8bc816;
+    letter-spacing: 12px;
+    left: 300px;
+    top:100px;
+    position: absolute;
+}
+
+.area{
+    position: absolute;
+    list-style: none;
+}
+
+#area_left{
+    left:240px;
+    top: 240px;
+    line-height: 180px;
+}
+
+#area_right{
+    left:760px;
+    top: 240px;
+    line-height: 180px;
+}

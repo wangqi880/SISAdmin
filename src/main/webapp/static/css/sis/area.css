@@ -33,14 +33,49 @@ html,body{
     list-style: none;
 }
 
-#area_left{
-    left:240px;
-    top: 240px;
+.area li{
+   float:left;
+}
+
+#area_top{
+    left:140px;
+    top: 400px;
     line-height: 180px;
 }
 
-#area_right{
-    left:760px;
-    top: 240px;
+#area_bottom{
+    left:140px;
+    top: 600px;
     line-height: 180px;
 }
+
+   .page-header{
+            position: absolute;
+            left : 190px;
+            top : 230px;
+            width: 200px;
+        }
+#searchClass{
+	position: absolute;
+    left : 470px;
+    top : 270px;
+    height: 50px;
+    width: 400px;
+}
+.searchBtu{
+	position: absolute;
+    left : 900px;
+    top : 265px;
+}
+         .numberTable td{
+            border:1px solid #2aabd2;
+            cursor: pointer;
+            width: 325px;
+            height: 100px;
+            font-size: 45px;
+        }
+        .unmberkey{
+	       	 position: absolute;
+	       	 left:140px;
+	   		 top: 400px;
+        }

@@ -64,6 +64,10 @@ public class ClazzController {
         param.put("classNo",classNo);
         String result = HttpClientUtil.sendHttpGet(Constants.ClazzSearchUrl,param);
         ClazzSearch search = AnalysisUtil.analyClazzSearch(result);
+        if(null == search)
+        {
+            return "fail";
+        }
         ClassDetail classinfo = AnalysisUtil.searchToDetail(search);
         session.setAttribute("class",classinfo);
         log.info("当前班级信息："+classinfo.toString());

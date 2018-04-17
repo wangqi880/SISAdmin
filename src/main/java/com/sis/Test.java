@@ -17,7 +17,7 @@ public class Test {
         String url = Constants.ClazzSearchUrl;
         Map<String,String> param = new HashMap<>();
         param.put("siteId",Constants.SITE_ID);
-        param.put("classNo","1810010");
+        param.put("classNo","1111");
         String clazzSearch = HttpClientUtil.sendHttpGet(url,param);
         ClazzSearch search = AnalysisUtil.analyClazzSearch(clazzSearch);
         System.out.println(search.getName());

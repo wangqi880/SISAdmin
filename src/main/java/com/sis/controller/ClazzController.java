@@ -1,5 +1,6 @@
 package com.sis.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.sis.column.ClazzSearch;
 import com.sis.common.Constants;
 import com.sis.model.ClassDetail;
@@ -57,20 +58,26 @@ public class ClazzController {
      * @return
      */
     @RequestMapping("/classSearch.do")
-    public String getClazzSearch(String classNo,HttpSession session)
+    @ResponseBody
+    public JSONObject getClazzSearch(String classNo,HttpSession session)
     {
+        JSONObject result = new JSONObject();
         Map<String,String> param = new HashMap<>();
         param.put("siteId",Constants.SITE_ID);
         param.put("classNo",classNo);
-        String result = HttpClientUtil.sendHttpGet(Constants.ClazzSearchUrl,param);
-        ClazzSearch search = AnalysisUtil.analyClazzSearch(result);
+        String str = HttpClientUtil.sendHttpGet(Constants.ClazzSearchUrl,param);
+        ClazzSearch search = AnalysisUtil.analyClazzSearch(str);
         if(null == search)
         {
-            return "fail";
+            result.put("code",0);
+            result.put("msg","fail");
+            return result;
         }
         ClassDetail classinfo = AnalysisUtil.searchToDetail(search);
         session.setAttribute("class",classinfo);
         log.info("当前班级信息："+classinfo.toString());
-        return "class_Info";
+        result.put("code",1);
+        result.put("msg","class_Info");
+        return result;
     }
 }

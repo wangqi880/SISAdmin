@@ -80,4 +80,14 @@ public class ClazzController {
         result.put("msg","class_Info");
         return result;
     }
+
+    /**
+     * 班级信息页面跳转
+     * @return
+     */
+    @RequestMapping("/classInfo.do")
+    public String classInfoView()
+    {
+        return "class_info";
+    }
 }

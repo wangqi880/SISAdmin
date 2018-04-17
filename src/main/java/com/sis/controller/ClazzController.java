@@ -1,10 +1,17 @@
 package com.sis.controller;
 
+import com.sis.column.ClazzSearch;
+import com.sis.common.Constants;
+import com.sis.model.ClassDetail;
+import com.sis.util.AnalysisUtil;
 import com.sis.util.HttpClientUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,6 +19,7 @@ import java.util.Map;
 @RequestMapping("/clazz")
 public class ClazzController {
 
+    private final static Logger log = LoggerFactory.getLogger(ClazzController.class);
     /**
      * 培训课程列表
      * @return
@@ -43,4 +51,22 @@ public class ClazzController {
         return result;
     }
 
+    /**
+     * 根据班级代码查询班级信息
+     * @param classNo
+     * @return
+     */
+    @RequestMapping("/classSearch.do")
+    public String getClazzSearch(String classNo,HttpSession session)
+    {
+        Map<String,String> param = new HashMap<>();
+        param.put("siteId",Constants.SITE_ID);
+        param.put("classNo",classNo);
+        String result = HttpClientUtil.sendHttpGet(Constants.ClazzSearchUrl,param);
+        ClazzSearch search = AnalysisUtil.analyClazzSearch(result);
+        ClassDetail classinfo = AnalysisUtil.searchToDetail(search);
+        session.setAttribute("class",classinfo);
+        log.info("当前班级信息："+classinfo.toString());
+        return "class_Info";
+    }
 }

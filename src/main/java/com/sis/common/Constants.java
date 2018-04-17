@@ -26,4 +26,5 @@ public class Constants
 	public static String PayUrl = "/api/pay.do";
 	public static String QueryPayUrl = "/api/payquery.do";
 	public static String TradeUrl = "http://trade.qsng.cn";
+	public static String ClazzSearchUrl = "/api/clazzSearch.do";
 }

@@ -70,6 +70,12 @@ public class AnalysisUtil
 		return clazzView;
 	}
 
+	public static ClazzSearch analyClazzSearch(String str)
+	{
+		ClazzSearch clazzSearch = JSON.parseObject(str,ClazzSearch.class);
+		return clazzSearch;
+	}
+
 	public static List<GradeColumn> analyGrade(String str)
 	{
 		Pattern p= Pattern.compile("(?<=\\{)(.+?)(?=\\})");
@@ -162,6 +168,28 @@ public class AnalysisUtil
 		classDetail.setAttitudinal(clazzView.getAttitudes());
 		classDetail.setSemester(clazzView.getTerm());
 		classDetail.setLevel(clazzView.getDegree());
+		return classDetail;
+	}
+
+	public static ClassDetail searchToDetail(ClazzSearch search)
+	{
+		ClassDetail classDetail = new ClassDetail();
+		classDetail.setAge(search.getApplyLimit());
+		classDetail.setMajor(search.getSpelName());
+		classDetail.setClassCode(search.getClassNo());
+		classDetail.setClassName(search.getName());
+		classDetail.setDesc(search.getDescript());
+		classDetail.setArea(search.getArea());
+		classDetail.setStatus(search.getFrontStatusName());
+		classDetail.setScheduleInfo(search.getTimeable());
+		classDetail.setTerm(search.getTerm());
+		classDetail.setDate(search.getClassDate());
+		classDetail.setCost(search.getClassFee());
+		classDetail.setTimes(String.valueOf(search.getTimes()));
+		classDetail.setAbility(search.getAbilitys());
+		classDetail.setAttitudinal(search.getAttitudes());
+		classDetail.setSemester(search.getTerm());
+		classDetail.setLevel(search.getDegree());
 		return classDetail;
 	}
 

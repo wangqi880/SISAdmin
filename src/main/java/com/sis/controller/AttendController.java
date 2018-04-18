@@ -80,6 +80,15 @@ public class AttendController
 	@RequestMapping(value="showClass",produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String showClass(String major,HttpSession session){
+		List<ClassDetail> list = new ArrayList<>();
+		if(StringUtils.isBlank(major) || major.equals("undefined")||  major.equals("null")){
+			ClassDetail detail = (ClassDetail) session.getAttribute("class");
+			list.add(detail);
+			Gson gson1 = new Gson();
+			String str = gson1.toJson(list);
+			session.setAttribute("classList",list);
+			return str;
+		}
 		AttendInfo info = (AttendInfo) session.getAttribute("attendInfo");
 		info.setMajorDetailId(major);
 		String spelId = major;
@@ -106,7 +115,6 @@ public class AttendController
 			clazzViews.addAll(clazzViews1);
 		}
 		log.info("报名信息："+info.toString());
-		List<ClassDetail> list = new ArrayList<>();
 
 		String area = info.getArea();
 		int countall = 0;
@@ -166,6 +174,9 @@ public class AttendController
 	@RequestMapping("/classDetail.do")
 	private String getClassDetail(String classCode,HttpSession session){
 		List<ClassDetail> list = (List<ClassDetail>)session.getAttribute("classList");
+		if(CollectionUtils.isEmpty(list)){
+			return "class_Info";
+		}
 		for(ClassDetail classinfo:list){
 			if(classinfo.getClassCode().equals(classCode)){
 				session.setAttribute("class",classinfo);
@@ -375,6 +386,9 @@ public class AttendController
 		returnCode.put("childList",studentInfos);
 		//保存报名信息
 		AttendInfo info = (AttendInfo) session.getAttribute("attendInfo");
+		if(info==null){
+			info = new AttendInfo();
+		}
 		info.setUserPhone(phoneNumber);// 用户手机号
 		info.setClassId(classCode);// 班级ID
 		session.setAttribute("attendInfo",info);

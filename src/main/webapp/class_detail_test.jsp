@@ -128,7 +128,7 @@
                     }
                     isGetCode = 1;
                     $.ajax({
-                        url:'info/getAccountInfo.do',
+                        url:'<%=basePath %>info/getAccountInfo.do',
                         type:'POST', //GET
                         async:true,    //或false,是否异步
                         data:{

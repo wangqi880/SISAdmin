@@ -74,7 +74,17 @@
                 <td class="title">能力特征：</td><td colspan="3"><%=myclass.getAbility()%></td> <td >态度特征:</td><td colspan="3"><%=myclass.getAttitudinal()%></td>
             </tr>
         </table>
+        <%
+            if(attendId!=null){
+        %>
         <a href="<%=basePath %>class_detail_test.jsp?major=<%=attendId.getMajorDetail()%>" class="stepBtu"><img src="<%=path %>/static/img/lastStep.png"></a>
+        <%
+            }else{
+        %>
+        <a href="<%=basePath %>class_detail_test.jsp" class="stepBtu"><img src="<%=path %>/static/img/lastStep.png"></a>
+        <%
+            }
+        %>
         <a href="<%=basePath %>index.jsp" class="indexBtu"><img src="<%=path %>/static/img/trunIndex.png"></a>
     </div>
 </body>

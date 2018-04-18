@@ -88,6 +88,6 @@ public class ClazzController {
     @RequestMapping("/classInfo.do")
     public String classInfoView()
     {
-        return "class_info";
+        return "class_detail";
     }
 }

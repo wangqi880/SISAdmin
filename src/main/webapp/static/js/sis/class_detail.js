@@ -101,8 +101,8 @@ function actionFormatter(value,row,index)
 
 function classInfo(value,row,index)
 {
-
-    return '<a class="showInfo" href="info/classDetail.do?classCode='+row.classCode+'">班级详细信息</a>';
+    var root = Utils.root();
+    return '<a class="showInfo" href="'+root+'/info/classDetail.do?classCode='+row.classCode+'">班级详细信息</a>';
 }
 
 window.actionEvents = {

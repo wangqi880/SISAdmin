@@ -62,12 +62,33 @@
     			$(".unmberkey").on("click", function(e){
     			    e.stopPropagation();
     			});
-    			$("#searchBtu").click(function(){
-    				var classId = $("#searchClass").val();
-    				if(classId != ""){
-    					classId = "cd"+classId;
-    				}
-    			});
+    			$(".searchBtu").click(function() {
+                    var classId = $("#searchClass").val();
+                    if (classId != "") {
+                        $.ajax({
+                            url: 'clazz/classSearch.do',
+                            type: 'POST', //GET
+                            async: true,    //或false,是否异步
+                            data: {
+                                classNo: classId
+                            },
+                            success: function (data) {
+                                if (data.code != 0) {
+                                    window.location.href = "clazz/classInfo.do";
+                                } else {
+                                    layer.msg("班级不存在", {
+                                        icon: 5
+                                    });
+                                }
+                            },
+                            error: function () {
+                                layer.msg("班级查询失败", {
+                                    icon: 5
+                                });
+                            },
+                        });
+                    }
+                });
     		});
     	</script>
     	<a href="#" class="searchBtu"><img style="height: 60px" src="<%=path %>/static/img/search.png"/></a>

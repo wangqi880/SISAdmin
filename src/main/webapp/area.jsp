@@ -74,7 +74,7 @@
                             },
                             success: function (data) {
                                 if (data.code != 0) {
-                                    window.location.href = "clazz/classInfo.do";
+                                    window.location.href = "class_detail_test.jsp";
                                 } else {
                                     layer.msg("班级不存在", {
                                         icon: 5

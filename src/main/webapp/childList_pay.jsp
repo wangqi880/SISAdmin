@@ -141,6 +141,7 @@
        				return;
        			}
        			$(".payBtu").hide();
+       			$(".readinfo").hide();
            	 	$.ajax({
                      url:'pay/getKeyNoCode.do',
                      type:'POST', //GET
@@ -223,6 +224,7 @@
        				return;
        			}
        			$(".payBtu").hide();
+       			$(".readinfo").hide();
            		$.ajax({
                      url:'pay/getKeyNoCode.do',
                      type:'POST', //GET
@@ -327,16 +329,18 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel" style="font-family: 楷体">选择支付方式</h4>
             </div>
-            	<span>
+            	<div  style="text-align: center" class="readinfo">
+            	<div style="width: 75%;margin: 0 auto;text-align: center;font-size: 18px;color: blue;">
             	支付说明：支付成功后，上课之前如需退费，仅支持原路退至您
 					的(支付宝、微信)支付账户。请不要找他人代刷支付学费，若钱
 					款损失，责任自负。开课三次后不再办理退费。谢谢合作！
-				</span>
-				<div class="checkbox">
+				</div>
+				<div class="checkbox" style="font-size: 18px">
 				    <label>
 				      <input type="checkbox" id="checkknow">我已阅读并知晓以上信息。
 				    </label>
 				</div>
+        </div>
            		 <ul class="payBtu">
               		<li style="float:left;margin-left:200px;"><a class="pay_weixin" ><img src="<%=path %>/static/img/pay/weixin.png"/></a></li>
               		<li ><a class="pay_zifubao"><img src="<%=path %>/static/img/pay/zhifubao.png"/></a></li>

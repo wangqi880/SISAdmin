@@ -162,7 +162,18 @@
         </table>
         <input value="" id="classId" hidden/>
     </div>
+    <%
+    	String major = request.getParameter("major");
+    	if(major==null || major ==""){
+    %>
+    	 <a href="area.jsp" class="stepBtu"><img src="<%=path %>/static/img/back.png"></a>
+    <% 
+    	}else{
+    %>
     <a href="class_detail_test.jsp?major=<%=request.getParameter("major") %>" class="stepBtu"><img src="<%=path %>/static/img/back.png"></a>
+	<% 
+    	}
+    %>
 </div>
 <script>
     $(function(){

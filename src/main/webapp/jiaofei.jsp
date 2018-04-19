@@ -178,6 +178,7 @@
         <input value="" id="classId" hidden/>
     </div>
    <a href="index.jsp" class="stepBtu"><img src="<%=path %>/static/img/lastStep.png"></a>
+   <a href="index.jsp" class="indexBtu"><img src="<%=path %>/static/img/trunIndex.png"></a>
    <!-- 模态框（Modal） -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="ture">
     <div class="modal-dialog">

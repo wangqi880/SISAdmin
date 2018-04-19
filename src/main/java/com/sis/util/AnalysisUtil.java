@@ -84,10 +84,11 @@ public class AnalysisUtil
 		return clazzView;
 	}
 
-	public static ClazzSearch analyClazzSearch(String str)
+	public static List<ClazzSearch> analyClazzSearch(String str)
 	{
-		ClazzSearch clazzSearch = JSON.parseObject(str, ClazzSearch.class);
-		return clazzSearch;
+//		ClazzSearch clazzSearch = JSON.parseObject(str,ClazzSearch.class);
+		List<ClazzSearch> clazzSearchs = JSON.parseArray(str,ClazzSearch.class);
+		return clazzSearchs;
 	}
 
 	public static List<GradeColumn> analyGrade(String str)
@@ -189,27 +190,33 @@ public class AnalysisUtil
 		return classDetail;
 	}
 
-	public static ClassDetail searchToDetail(ClazzSearch search)
+	public static List<ClassDetail> searchToDetail(List<ClazzSearch> searchs)
 	{
-		ClassDetail classDetail = new ClassDetail();
-		classDetail.setAge(search.getApplyLimit());
-		classDetail.setMajor(search.getSpelName());
-		classDetail.setClassCode(search.getClassNo());
-		classDetail.setClassName(search.getName());
-		classDetail.setDesc(search.getDescript());
-		classDetail.setArea(search.getArea());
-		classDetail.setStatus(search.getFrontStatusName());
-		classDetail.setScheduleInfo(search.getTimeable());
-		classDetail.setTerm(search.getTerm());
-		classDetail.setDate(search.getClassDate());
-		classDetail.setCost(search.getClassFee());
-		classDetail.setTimes(String.valueOf(search.getTimes()));
-		classDetail.setAbility(search.getAbilitys());
-		classDetail.setAttitudinal(search.getAttitudes());
-		classDetail.setSemester(search.getTerm());
-		classDetail.setLevel(search.getDegree());
-		classDetail.setId(search.getId());
-		return classDetail;
+		List<ClassDetail> details = new ArrayList<>();
+		for(ClazzSearch search : searchs)
+		{
+			ClassDetail classDetail = new ClassDetail();
+			classDetail.setId(search.getId());
+			classDetail.setAge(search.getApplyLimit());
+			classDetail.setMajor(search.getSpelName());
+			classDetail.setClassCode(search.getClassNo());
+			classDetail.setClassName(search.getName());
+			classDetail.setDesc(search.getDescript());
+			classDetail.setArea(search.getArea());
+			classDetail.setStatus(search.getFrontStatusName());
+			classDetail.setScheduleInfo(search.getTimeable());
+			classDetail.setTerm(search.getTerm());
+			classDetail.setDate(search.getClassDate());
+			classDetail.setCost(String.valueOf(search.getTotalFees()));
+			classDetail.setTimes(String.valueOf(search.getTimes()));
+			classDetail.setAbility(search.getAbilitys());
+			classDetail.setAttitudinal(search.getAttitudes());
+			classDetail.setSemester(search.getTerm());
+			classDetail.setLevel(search.getDegree());
+			details.add(classDetail);
+		}
+
+		return details;
 	}
 
 	public static ClazzApplyColumn anaylyClazzApply(String str)

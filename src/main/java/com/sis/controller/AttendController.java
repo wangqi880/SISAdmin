@@ -82,11 +82,10 @@ public class AttendController
 	public String showClass(String major,HttpSession session){
 		List<ClassDetail> list = new ArrayList<>();
 		if(StringUtils.isBlank(major) || major.equals("undefined")||  major.equals("null")){
-			ClassDetail detail = (ClassDetail) session.getAttribute("class");
-			list.add(detail);
+			List<ClassDetail> details = (List<ClassDetail>) session.getAttribute("class");
 			Gson gson1 = new Gson();
-			String str = gson1.toJson(list);
-			session.setAttribute("classList",list);
+			String str = gson1.toJson(details);
+			session.setAttribute("classList",details);
 			return str;
 		}
 		AttendInfo info = (AttendInfo) session.getAttribute("attendInfo");

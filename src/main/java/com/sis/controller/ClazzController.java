@@ -1,23 +1,23 @@
 
 package com.sis.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.alibaba.fastjson.JSONObject;
 import com.sis.column.ClazzSearch;
 import com.sis.common.Constants;
 import com.sis.model.ClassDetail;
 import com.sis.util.AnalysisUtil;
 import com.sis.util.HttpClientUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @ Controller
 @ RequestMapping ("/clazz")
@@ -56,34 +56,34 @@ public class ClazzController
 		return result;
 	}
 
-	/**
-	 * 根据班级代码查询班级信息
-	 * @param classNo
-	 * @return
-	 */
-	@ RequestMapping ("/classSearch.do")
-	@ ResponseBody
-	public JSONObject getClazzSearch(String classNo , HttpSession session)
-	{
-		JSONObject result = new JSONObject();
-		Map<String , String> param = new HashMap<>();
-		param.put("siteId", Constants.SITE_ID);
-		param.put("classNo", classNo);
-		String str = HttpClientUtil.sendHttpGet(Constants.ClazzSearchUrl, param);
-		ClazzSearch search = AnalysisUtil.analyClazzSearch(str);
-		if(null == search)
-		{
-			result.put("code", 0);
-			result.put("msg", "fail");
-			return result;
-		}
-		ClassDetail classinfo = AnalysisUtil.searchToDetail(search);
-		session.setAttribute("class", classinfo);
-		log.info("当前班级信息：" + classinfo.toString());
-		result.put("code", 1);
-		result.put("msg", "class_Info");
-		return result;
-	}
+    /**
+     * 根据班级代码查询班级信息
+     * @param classNo
+     * @return
+     */
+    @RequestMapping("/classSearch.do")
+    @ResponseBody
+    public JSONObject getClazzSearch(String classNo,HttpSession session)
+    {
+        JSONObject result = new JSONObject();
+        Map<String,String> param = new HashMap<>();
+        param.put("siteId",Constants.SITE_ID);
+        param.put("classNo",classNo);
+        String str = HttpClientUtil.sendHttpGet(Constants.ClazzSearchUrl,param);
+        List<ClazzSearch> searchs = AnalysisUtil.analyClazzSearch(str);
+        if(CollectionUtils.isEmpty(searchs))
+        {
+            result.put("code",0);
+            result.put("msg","fail");
+            return result;
+        }
+        List<ClassDetail> classinfo = AnalysisUtil.searchToDetail(searchs);
+        session.setAttribute("class",classinfo);
+        log.info("当前班级信息："+classinfo.toString());
+        result.put("code",1);
+        result.put("msg","class_Info");
+        return result;
+    }
 
 	/**
 	 * 班级信息页面跳转

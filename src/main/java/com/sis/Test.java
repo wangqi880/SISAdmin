@@ -7,6 +7,7 @@ import com.sis.util.AnalysisUtil;
 import com.sis.util.HttpClientUtil;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Test {
@@ -17,10 +18,11 @@ public class Test {
         String url = Constants.ClazzSearchUrl;
         Map<String,String> param = new HashMap<>();
         param.put("siteId",Constants.SITE_ID);
-        param.put("classNo","1810010");
+        param.put("classNo","1810001");
         String clazzSearch = HttpClientUtil.sendHttpGet(url,param);
-        ClazzSearch search = AnalysisUtil.analyClazzSearch(clazzSearch);
-        System.out.println(search.getName());
+        List<ClazzSearch> search = AnalysisUtil.analyClazzSearch(clazzSearch);
+        List<ClassDetail> details = AnalysisUtil.searchToDetail(search);
+        System.out.println(search.size());
 
     }
 }

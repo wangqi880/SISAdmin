@@ -758,29 +758,56 @@ public class AttendController
 			ClassDetail classDetail = new ClassDetail();
 			String year = column.getYear();
 			String term = column.getTerm();
-			if(("3".equals(column.getApplyStatus()) || "已缴费".equals(column.getApplyStatus())) && (controlYear.contains(year)) && (controlTerm.contains(term)))
-			{
-				classDetail.setClassName(column.getName());
-				classDetail.setAge(column.getApplyLimit());
-				classDetail.setMajor(column.getSpelName());
-				classDetail.setClassCode(column.getClazzNo());
-				classDetail.setArea(column.getArea());
-				classDetail.setStatus(column.getApplyStatus());
-				classDetail.setScheduleInfo(column.getTimeable());
-				classDetail.setTerm(column.getYear());
-				classDetail.setDate(column.getClassDate());
-				classDetail.setCost(column.getTotalFees());
-				classDetail.setTimes(column.getTimes());
-				classDetail.setSemester(column.getTerm());
-				classDetail.setLevel(column.getDegree());
-				classDetail.setReserveNo(column.getReserveNo());
-				classDetail.setClassDate(column.getClassDate());
-				classDetail.setBeginTime(column.getBeginTime());
-				//根据学生id和classid获取总共打印次数
-				int num = printService.getAllPrintCount(studentId,column.getClazzNo());
-				classDetail.setPrintNum(num);
-				list.add(classDetail);
+			if(StringUtils.isNotEmpty(reserveNo)){
+				if(("3".equals(column.getApplyStatus()) || "已缴费".equals(column.getApplyStatus())) && (controlYear.contains(year)) && (controlTerm.contains(term)) && (reserveNo.equals(column.getReserveNo())))
+				{
+					classDetail.setClassName(column.getName());
+					classDetail.setAge(column.getApplyLimit());
+					classDetail.setMajor(column.getSpelName());
+					classDetail.setClassCode(column.getClazzNo());
+					classDetail.setArea(column.getArea());
+					classDetail.setStatus(column.getApplyStatus());
+					classDetail.setScheduleInfo(column.getTimeable());
+					classDetail.setTerm(column.getYear());
+					classDetail.setDate(column.getClassDate());
+					classDetail.setCost(column.getTotalFees());
+					classDetail.setTimes(column.getTimes());
+					classDetail.setSemester(column.getTerm());
+					classDetail.setLevel(column.getDegree());
+					classDetail.setReserveNo(column.getReserveNo());
+					classDetail.setClassDate(column.getClassDate());
+					classDetail.setBeginTime(column.getBeginTime());
+					//根据学生id和classid获取总共打印次数
+					int num = printService.getAllPrintCount(studentId,column.getClazzNo());
+					classDetail.setPrintNum(num);
+					list.add(classDetail);
+				}
+			}else{
+				if(("3".equals(column.getApplyStatus()) || "已缴费".equals(column.getApplyStatus())) && (controlYear.contains(year)) && (controlTerm.contains(term)))
+				{
+					classDetail.setClassName(column.getName());
+					classDetail.setAge(column.getApplyLimit());
+					classDetail.setMajor(column.getSpelName());
+					classDetail.setClassCode(column.getClazzNo());
+					classDetail.setArea(column.getArea());
+					classDetail.setStatus(column.getApplyStatus());
+					classDetail.setScheduleInfo(column.getTimeable());
+					classDetail.setTerm(column.getYear());
+					classDetail.setDate(column.getClassDate());
+					classDetail.setCost(column.getTotalFees());
+					classDetail.setTimes(column.getTimes());
+					classDetail.setSemester(column.getTerm());
+					classDetail.setLevel(column.getDegree());
+					classDetail.setReserveNo(column.getReserveNo());
+					classDetail.setClassDate(column.getClassDate());
+					classDetail.setBeginTime(column.getBeginTime());
+					//根据学生id和classid获取总共打印次数
+					int num = printService.getAllPrintCount(studentId,column.getClazzNo());
+					classDetail.setPrintNum(num);
+					list.add(classDetail);
+				}
 			}
+
 
 		}
 		map.put("status","SUCCESS");

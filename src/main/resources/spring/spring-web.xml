@@ -17,11 +17,13 @@
 		（1）自动注册DefaultAnnotationHandlerMapping,AnnotationMethodHandlerAdapter 
 		(2)提供一系列：数据绑定，数字和日期格式化 @NumberFormat,@DateTimeFormat, xml，json默认读写支持。 -->
 	<mvc:annotation-driven />
+	<mvc:resources mapping="/static/**" location="/static/" />
 	<!--servlet-mapping 映射路径:"/" 
 		2.静态资源默认servlet配置 
 		（1）.加入对静态资源的处理：js,png 
 		 (2).允许用"/"做整体映射 -->
 	<mvc:default-servlet-handler />
+
 
 	<!-- 3.配置jsp,显示ViewResolver -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

@@ -32,8 +32,12 @@
         width: 1080px;
     }
     body{
-        background-image:url("<%=path %>/static/img/background_index.png");
+        background-image:url("<%=path %>/static/img/background_index_old.png");
         background-repeat: no-repeat;
+        width:1280px;
+        height:1024px;
+        overflow-x: hidden;
+        overflow-y: hidden;
     }
     table{
         margin:0 auto;

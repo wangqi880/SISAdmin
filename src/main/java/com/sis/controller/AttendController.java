@@ -147,6 +147,13 @@ public class AttendController
 			classDetail.setSemester(clazzView.getTerm());
 			classDetail.setLevel(clazzView.getDegree());
 			classDetail.setId(clazzView.getId());
+			classDetail.setYear(clazzView.getYear());
+			try {
+				String btime = DateUtil.getDateToStringFormat(clazzView.getBeginTime(), "yyyy-MM-dd");
+				classDetail.setBeginTime(btime);
+			}catch (Exception e){
+				classDetail.setBeginTime(clazzView.getBeginTime());
+			}
 			list.add(classDetail);
 		}
 		System.out.println("counte:"+counte);
@@ -198,8 +205,7 @@ public class AttendController
 	 * 展示学员课表
 	 * @return
 	 */
-	@RequestMapping(value = "/showSchedule.do",produces = "application/json;charset=utf-8")
-	//@RequestMapping("/showSchedule.do")
+	/*@RequestMapping(value = "/showSchedule.do",produces = "application/json;charset=utf-8")
 	@ResponseBody
 	private Map<String, Object> showSchedule(String studentId,HttpSession session){
 		//TODO 根据学员ID查询学员本学期课表（已缴费的课程）
@@ -246,6 +252,55 @@ public class AttendController
 		}
 		SessionUtil.printSession(session);
 		return table;
+	}*/
+
+	@RequestMapping(value = "/showSchedule.do",produces = "application/json;charset=utf-8")
+	@ResponseBody
+	private Map<String,Object> showSchedule(String studentId,HttpSession session){
+		//TODO 根据学员ID查询学员本学期课表（已缴费的课程）
+		//TODO 已缴费的课程的timeTable字段封装成List
+		//TODO 这个人、这个学期、已缴费的
+		List<ScheduleTd> timeTable = new ArrayList<>();
+
+		String url = Constants.StudentClazzListUrl;
+		Map<String,String> param = new HashMap<>();
+		param.put("siteId",Constants.SITE_ID);
+		param.put("studentId",studentId);
+		String studentClazzViewInfo = HttpClientUtil.sendHttpGet(url,param);
+		List<StudentClazzListColumn> studentClazzList;
+		Map<String,Object> map = new HashMap<>();
+		try
+		{
+			studentClazzList = AnalysisUtil.analyStudentClazzList(studentClazzViewInfo);
+		}
+		catch (Exception e)
+		{
+			log.error("解析失败",e);
+			map.put("status","ERROR");
+			SessionUtil.printSession(session);
+			return map;
+		}
+		List<StudentClazzListColumn>  myclassList = new ArrayList<>();
+		for(StudentClazzListColumn column : studentClazzList)
+		{
+			ScheduleTd scheduleTd = new ScheduleTd();
+			scheduleTd.setInfo(column.getSpelName());
+			scheduleTd.setSchedule(column.getTimeable());
+			if("3".equals(column.getApplyStatus()) || "已缴费".equals(column.getApplyStatus()))
+			{
+				String endTime = column.getEndTime();
+				String classPlace=	ViewsAppend.getClassPlace(scheduleTd);
+				column.setClassPlace(classPlace);
+				//只有结束时间在当前时间之后的课程才显示
+				if(StringUtils.isNotEmpty(endTime) && DateUtil.compare_date(endTime,"yyyy-MM-dd")>=0){
+					myclassList.add(column);
+				}
+			}
+		}
+		map.put("status","SUCCESS");
+		map.put("data",myclassList);
+		SessionUtil.printSession(session);
+		return map;
 	}
 
 	/**
@@ -721,7 +776,7 @@ public class AttendController
 
 	@RequestMapping("/getPrintInfo.do")
 	@ResponseBody
-	public Map<String,Object> getStudentClazzInfo(String studentId,HttpSession session)
+	public Map<String,Object> getStudentClazzInfo(String studentId,String studentName,HttpSession session)
 	{
 		String url = Constants.StudentClazzListUrl;
 		Map<String,String> param = new HashMap<>();
@@ -777,6 +832,7 @@ public class AttendController
 					classDetail.setReserveNo(column.getReserveNo());
 					classDetail.setClassDate(column.getClassDate());
 					classDetail.setBeginTime(column.getBeginTime());
+					classDetail.setStatusName(studentName);
 					//根据学生id和classid获取总共打印次数
 					int num = printService.getAllPrintCount(studentId,column.getClazzNo());
 					classDetail.setPrintNum(num);
@@ -801,6 +857,7 @@ public class AttendController
 					classDetail.setReserveNo(column.getReserveNo());
 					classDetail.setClassDate(column.getClassDate());
 					classDetail.setBeginTime(column.getBeginTime());
+					classDetail.setStatusName(studentName);
 					//根据学生id和classid获取总共打印次数
 					int num = printService.getAllPrintCount(studentId,column.getClazzNo());
 					classDetail.setPrintNum(num);

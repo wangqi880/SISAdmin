@@ -15,8 +15,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="<%=path %>/static/css/sis/stepBtu.css" rel="stylesheet" />
-
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>课程表</title>
     <!-- Bootstrap -->
@@ -49,7 +47,16 @@
             top:100px;
             position: absolute;
         }
+        .stepBtu{
+            position: absolute;
+            top:950px;
+        }
 
+        .indexBtu{
+            position: absolute;
+            top:950px;
+            left: 984px;
+        }
         td{
             text-align:center;
         }
@@ -75,27 +82,18 @@
                     });
                     return;
                 }
-                var info = data.data;
+                var info = data.info;
                 if(info==""){
                     layer.msg("未查询到课表信息", {
                         icon : 5
                     });
                 }
-                for (i in info) {
-                    /*layer.msg("等待加载课表", {
+                for(var i = 0 ; i < info.length;i++){
+                    layer.msg("等待加载课表", {
                         icon : 1
-                    });*/
-                    $("tbody").append(" <tr>\n" +
-                        "                <td>"+info[i].year+"</td>\n" +
-                        "                <td>"+info[i].term+"</td>\n" +
-                        "                <td>"+info[i].spelName+"</td>\n" +
-                        "                <td>"+info[i].clazzNo+"</td>\n" +
-                        "                <td>"+info[i].name+"</td>\n" +
-                        "                <td>"+info[i].area+"</td>\n" +
-                        "                <td>"+info[i].timeable+"</td>\n" +
-                        "                <td>"+info[i].classPlace+"</td>\n" +
-                        "                <td>"+info[i].beginTime+"</td>\n" +
-                        "            </tr>");
+                    });
+                    var tdid = "day_"+info[i].xString;
+                    $("#"+tdid).append("</br>"+info[i].infoname+"</br></br>"+info[i].infotime+"</br></br>"+info[i].infoarea+"</br><hr></br>");
                 }
             },
             error:function(){
@@ -106,42 +104,29 @@
         });
     });
 </script>
-<div class="main">
+<div class="container-fluid">
     <div class="showDate">
         <span class="date">日期</span>
     </div>
-    <div  class="listTable" style="text-align: center;width: 100%;margin-top: 300px">
-        <table class="table table-hover" style="width: 70%;cellpadding:2px" >
-            <thead>
-            <tr style="text-align: center;font-size: 25px;font-family: 楷体" >
-                <th style="text-align: center">学年</th>
-                <th style="text-align: center">学期</th>
-                <th style="text-align: center">专业</th>
-                <th style="text-align: center">班级代码</th>
-                <th style="text-align: center">班级名称</th>
-                <th style="text-align: center">区域</th>
-                <th style="text-align: center">上课时间</th>
-                <th style="text-align: center">教室</th>
-                <th style="text-align: center">开课时间</th>
-            </tr>
+    <div class="showTable" style="text-align: center">
+        <table class='schedule' style='width:1000px;height:200px;margin-left:160px;margin-top:200px;table-layout:fixed;'>
+            <thead class='thead' style='color:white;text-align:center;font-size:30px;font-family:方正舒体;background-color:#0080FF;line-height:45px;'>
+            <td style='background-color:#EA7500;'>周一</td><td style='background-color:#FFD306;'>周二</td><td style='background-color:#8CEA00;'>周三</td><td style='background-color:#02F78E;'>周四</td>
+            <td style='background-color:#FF60AF;'>周五</td><td style='background-color:#5B00AE;'>周六</td><td style='background-color:red;'>周日</td>
             </thead>
-            <tbody>
-           <%-- <tr>
-                <td>无</td>
-                <td>info[i].year</td>
-                <td>info[i].term</td>
-                <td>info[i].spelName</td>
-                <td>info[i].clazzNo</td>
-                <td>info[i].name</td>
-                <td>info[i].area</td>
-                <td>info[i].timeable</td>
-                <td>info[i].classPlace</td>
-                <td>info[i].beginTime</td>
-            </tr>--%>
-            </tbody>
+            <tr >
+                <td style="width:142.8px" id="day_1"></td>
+                <td style="width:142.8px" id="day_2"></td>
+                <td style="width:142.8px" id="day_3"></td>
+                <td style="width:142.8px" id="day_4"></td>
+                <td style="width:142.8px" id="day_5"></td>
+                <td style="width:142.8px" id="day_6"></td>
+                <td style="width:142.8px" id="day_0"></td>
+            </tr>
         </table>
     </div>
-   </div>
+    <a href="<%=basePath %>index.jsp" class="indexBtu"><img src="<%=path %>/static/img/trunIndex.png"></a>
+</div>
 <script>
     $(function(){
         var timeOut = 0;
@@ -159,7 +144,5 @@
         },1000);
     });
 </script>
-<a href="#" onclick="javascript:history.back(-1);" class="stepBtu"><img src="<%=path %>/static/img/back.png"></a>
-<a href="<%=basePath %>index.jsp" class="indexBtu"><img src="<%=path %>/static/img/trunIndex.png"></a>
 </body>
 </html>

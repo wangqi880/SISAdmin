@@ -182,7 +182,7 @@
    <!-- 模态框（Modal） -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="ture">
     <div class="modal-dialog">
-        <div class="modal-content" style="width:1000px;margin-left:-200px;height:550px;">
+        <div class="modal-content" style="width:1000px;margin-left:-200px;">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel" style="font-family: 楷体">核对学员及报名班级信息</h4>
@@ -198,7 +198,7 @@
 					的(支付宝、微信)支付账户。请不要找他人代刷支付学费，若钱
 					款损失，责任自负。开课三次后不再办理退费。谢谢合作！
 				</div>
-				<div class="checkbox" style="font-size: 18px">
+				<div class="checkbox" style="font-size: 18px;zoom:200%">
 				    <label>
 				      <input type="checkbox" id="checkknow">我已阅读并知晓以上信息。
 				    </label>

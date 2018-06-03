@@ -52,7 +52,7 @@
             width: 1080px;
         }
         .userInfo{
-            font-size: 24px;
+            font-size: 20px;
             width: 40px;
             font-family: 微软雅黑;
         }
@@ -61,21 +61,41 @@
 <body>
 <%
 	StudentInfo studentInfo = (StudentInfo)request.getSession().getAttribute("jfstu_List");
+    if(null==studentInfo){
+        studentInfo = new StudentInfo();
+    }
 	ClassDetail classDetail = (ClassDetail)request.getSession().getAttribute("jfdetail_List");
+    if(null==classDetail){
+        classDetail = new ClassDetail();
+    }
+    String reserveNo =  (String)request.getSession().getAttribute("reserveNo");
 %>
-<h1 class="page-header"><button type="button" class="button red side" style="width: 250px">请选择学生</button></h1>
+<h1 class="page-header">
+    <c:if test="${ not empty reserveNo}">
+    <button type="button" class="button red side" style="width: 250px">
+        请交费
+    </button>
+    </c:if>
+    <c:if test="${empty reserveNo}">
+        <button type="button" class="button red side" style="width: 450px">
+            连接是超时，请返回首页
+        </button>
+    </c:if>
+</h1>
 <div class="main">
     <div class="showDate">
         <span class="date">日期</span>
     </div>
     <div class="listTable" style="text-align: center;width: 100%;margin-top: 300px">
-        <table class="table table-hover" style="width: 85%;margin: 0 auto;text-align: center" >
+        <table class="table table-hover" style="margin: 0 auto;text-align: center" >
             <thead>
-            <tr style="text-align: center;font-size: 30px;font-family: 楷体" >
+            <tr style="text-align: center;font-size: 25px;font-family: 楷体" >
+                <th style="text-align: center">预约号</th>
                 <th style="text-align: center">学生姓名</th>
                 <th style="text-align: center">区域</th>
                 <th style="text-align: center">班级代码</th>
                 <th style="text-align: center">班级名称</th>
+                <th style="text-align: center">上课时间</th>
                 <th style="text-align: center">费用</th>
                 <th style="text-align: center">缴费状态</th>
                 <th style="text-align: center">操作</th>
@@ -84,15 +104,21 @@
             <tbody>
            
            <tr class="userInfo" style="cursor: pointer">
+               <td><c:if test="${ not empty reserveNo}"><%=reserveNo %></c:if></td>
                <td><%=studentInfo.getStuName()%></td>
                <td><%=classDetail.getArea()%></td>
                <td><%=classDetail.getClassCode()%></td>
                <td><%=classDetail.getClassName()%></td>
+               <td><%=classDetail.getScheduleInfo()%></td>
                <td><%=classDetail.getCost()%></td>
                <td><%=classDetail.getStatusName()%></td>
                <%
-                    String status = classDetail.getStatusName();
-                    if(status.equals("可缴费")){
+                   String status="";
+                    if(null!=classDetail){
+                        status = classDetail.getStatusName();
+                    }
+
+                    if("可缴费".equals(status)){
                %>
                <td><a style="cursor: pointer" id="modeltigger"  data-toggle="modal" data-target="#myModal">缴费</a></td>
                <%
@@ -112,8 +138,6 @@
 </div>
     <script>
         $(function(){
-        	
-        
         	  var timeOut = 0;
               $(window).click(function(){
                   timeOut = 0;
@@ -324,7 +348,7 @@
 <!-- 模态框（Modal） -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="ture">
     <div class="modal-dialog">
-        <div class="modal-content" style="width:1000px;margin-left:-200px;height:500px;">
+        <div class="modal-content" style="width:1000px;margin-left:-200px;">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel" style="font-family: 楷体">选择支付方式</h4>
@@ -335,7 +359,7 @@
 					的(支付宝、微信)支付账户。请不要找他人代刷支付学费，若钱
 					款损失，责任自负。开课三次后不再办理退费。谢谢合作！
 				</div>
-				<div class="checkbox" style="font-size: 18px">
+				<div class="checkbox" style="font-size: 18px;zoom:200%">
 				    <label>
 				      <input type="checkbox" id="checkknow">我已阅读并知晓以上信息。
 				    </label>

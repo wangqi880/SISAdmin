@@ -73,7 +73,12 @@ function TableInit(){
                 align:'center',
             },
             {
-                field:'date',
+                field:'year',
+                title:'学年',
+                align:'center',
+            },
+            {
+                field:'beginTime',
                 title:'开课时间',
                 align:'center',
             },

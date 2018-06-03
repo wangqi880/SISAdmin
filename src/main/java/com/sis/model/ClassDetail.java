@@ -45,6 +45,7 @@ public class ClassDetail {
 
     //总共打印次数
     int printNum;
+    String year;
 
     public ClassDetail() {
     }
@@ -297,5 +298,13 @@ public class ClassDetail {
 
     public void setPrintNum(int printNum) {
         this.printNum = printNum;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
     }
 }

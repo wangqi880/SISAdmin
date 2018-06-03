@@ -68,15 +68,18 @@
     </div>
 
     <%
- /*       request.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
         String studentName = request.getParameter("studentName");
-        byte[] b = studentName.getBytes("iso-8859-1");
-        String  name = new String(b,"UTF-8");*/
+        String  name="";
+        if(null!= studentName && (!"".equals(studentName))){
+            byte[] b = studentName.getBytes("iso-8859-1");
+              name = new String(b,"UTF-8");
+        }
 
-    	String name = request.getParameter("studentName");
+
     %>
     <input id="stuId" value="<%=request.getParameter("studentId") %>" hidden/>
-     <input id="stuName" value="<%=request.getParameter("studentName") %>" hidden/>
+     <input id="stuName" value="<%=name %>" hidden/>
     <div class="tab" style="text-align:center;margin-top:250px;margin-left: 80px">
         <blockquote class="layui-elem-quote" id="print_year_term_show">
 
@@ -254,7 +257,7 @@
                             '        </div>\n' +
                             '        <span>**************************</span><br>\n' +
                             '            <label>打印时间：'+getNowFormatDate()+'</label><br>\n' +
-                            '            <label>打印次数：'+classinfo[i].printNum+1+'</label><br>\n' +
+                            '            <label>打印次数：'+classinfo[i].printNum+'</label><br>\n' +
                             '        <span>**************************</span><br>\n' +
                             '            <label>开课三次后不能退费,敬请理解</label><br>\n' +
                             '    </div>'

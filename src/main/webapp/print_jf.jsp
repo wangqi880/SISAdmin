@@ -65,15 +65,17 @@
         <span class="date">日期</span>
     </div>
     <%
-       /* request.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
         String studentName = request.getParameter("studentName");
-        byte[] b = studentName.getBytes("iso-8859-1");
-      String  name = new String(b,"UTF-8");*/
-
+        String  name="";
+        if(null!=studentName && (!"".equals(studentName))){
+            byte[] b = studentName.getBytes("iso-8859-1");
+              name = new String(b,"UTF-8");
+        }
        /* String name = request.getParameter("studentName");*/
     %>
     <input id="stuId" value="<%=request.getParameter("studentId") %>" hidden/>
-    <input id="stuName" value="<%=request.getParameter("studentName") %>" hidden/>
+    <input id="stuName" value="<%=name %>" hidden/>
     <div class="tab" style="text-align:center;margin-top:250px;">
         <blockquote class="layui-elem-quote" id="print_year_term_show">
 
@@ -90,16 +92,19 @@
                     <col width="120">
                     <col width="120">
                     <col width="120">
+                    <col width="120">
 
                 </colgroup>
                 <thead>
                 <tr style="text-align: center">
+                    <th style="text-align:center">姓名</th>
                     <th style="text-align:center">班级代码</th>
                     <th style="text-align:center">班级名称</th>
                     <th style="text-align:center">专业</th>
                     <th style="text-align:center">课程表</th>
                     <th style="text-align:center">学期</th>
                     <th style="text-align:center">学年</th>
+                    <th style="text-align:center">开课时间</th>
                     <th style="text-align:center">开课次数</th>
                     <th style="text-align:center">学费</th>
 
@@ -121,7 +126,7 @@
         function printme(classCode)
         {
           //  alert($("#stuName").val())
-          // alert(classCode);
+           alert($("#stuId").val());
             $.ajax({
                 url:'print/getRecord.do',
                 type:'POST', //GET
@@ -180,7 +185,7 @@
 
     </script>
     <%--<button style="margin-left:900px;width:130px;" id="printbtu" type="button" class="btn btn-primary" onclick="printme()" data-toggle="button">打印</button>--%>
-    <a class="printBtu" id="print_id" onclick="print()"><img id="print_img"></a>
+    <div><a class="printBtu" id="print_id" onclick="print()"><img id="print_img"></a></div>
     <a href="<%=basePath %>index.jsp" class="indexBtu"><img src="<%=path %>/static/img/trunIndex.png"></a>
 </div>
 <!-- 打印DIV -->
@@ -210,9 +215,8 @@
         printme(classId);
     }
     $(function(){
-
         $.ajax({
-            url:'info/getPrintInfo.do?studentId='+$("#stuId").val(),
+            url:'info/getPrintInfo.do?studentId='+$("#stuId").val()+"&studentName="+$("#stuName").val(),
             type:'POST', //GET
             async:false,    //或false,是否异步
             success:function(data){
@@ -226,9 +230,19 @@
                     var printTerm = data.controlTerm;
                     $("#print_year_term_show").append("打印控制:学年-"+printYear+",学期-"+printTerm+"");
                     for(var i =0; i < classinfo.length;i++){
-                       // alert(classinfo[i].classCode);
                         classId=classinfo[i].classCode;
-                        var info = '<tr style="text-align:center"><td style="text-align:center" class="classcode">'+classinfo[i].classCode+'</td><td style="text-align:center">'+classinfo[i].className+'</td><td style="text-align:center">'+classinfo[i].major+'</td><td style="text-align:center">'+classinfo[i].scheduleInfo+'</td><td style="text-align:center">'+classinfo[i].semester+'</td><td style="text-align:center">'+classinfo[i].term+'</td><td style="text-align:center">'+classinfo[i].times+'</td><td style="text-align:center">'+classinfo[i].cost+'</td></tr>'
+                        var info = '<tr style="text-align:center">' +
+                            '<td style="text-align:center">'+$("#stuName").val()+'</td>' +
+                            '<td style="text-align:center" class="classcode">'+classinfo[i].classCode+'</td>' +
+                          '<td style="text-align:center">'+classinfo[i].className+'</td>' +
+                           '<td style="text-align:center">'+classinfo[i].major+'</td>' +
+                            '<td style="text-align:center">'+classinfo[i].scheduleInfo+'</td>' +
+                             '<td style="text-align:center">'+classinfo[i].semester+'</td>' +
+                              '<td style="text-align:center">'+classinfo[i].term+'</td>' +
+                            '<td style="text-align:center">'+classinfo[i].beginTime+'</td>' +
+                            '<td style="text-align:center">'+classinfo[i].times+'</td>' +
+                                '<td style="text-align:center">'+classinfo[i].cost+'</td>' +
+                                 '</tr>'
                         var printInfo='<div id="printInfo_'+classinfo[i].classCode+'"class="print_container" style="display: none;font-size: 10px">\n' +
                             '        <div class="section1">\n' +
                             '            成都市青少年宫\n' +
@@ -252,7 +266,7 @@
                             '        </div>\n' +
                             '        <span>**************************</span><br>\n' +
                             '            <label>打印时间：'+getNowFormatDate()+'</label><br>\n' +
-                            '            <label>打印次数：'+classinfo[i].printNum+1+'</label><br>\n' +
+                            '            <label>打印次数：'+classinfo[i].printNum+'</label><br>\n' +
                             '        <span>**************************</span><br>\n' +
                             '            <label>开课三次后不能退费,敬请理解</label><br>\n' +
                             '    </div>'

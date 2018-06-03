@@ -80,7 +80,16 @@
 <body>
 <%
     ClassDetail classDetail = (ClassDetail)request.getSession().getAttribute("jf_stu_classInfo");
+    request.setCharacterEncoding("UTF-8");
+    String studentName = request.getParameter("studentName");
+    String  name="";
+    if(null!=studentName && (!"".equals(studentName))){
+        byte[] b = studentName.getBytes("iso-8859-1");
+        name = new String(b,"UTF-8");
+    }
 %>
+<input id="stuId" value="<%=request.getParameter("studentId") %>" hidden/>
+<input id="stuName" value="<%=name %>" hidden/>
 <h1 class="page-header"><button type="button" class="button red side" style="width: 250px">缴费完成</button></h1>
 <div class="main">
     <div class="showDate">
@@ -97,6 +106,7 @@
                 <th style="text-align: center">课表</th>
                 <th style="text-align: center">学期</th>
                 <th style="text-align: center">学年</th>
+                <th style="text-align: center">开课时间</th>
                 <th style="text-align: center">开课次数</th>
                 <th style="text-align: center">费用</th>
             </tr>
@@ -109,10 +119,11 @@
                    <td><%=classDetail.getMajor() %></td>
                    <td><%= classDetail.getScheduleInfo()%></td>
                    <td><%= classDetail.getSemester()%></td>
-                   <td><%= classDetail.getDate()%></td>
+                   <td><%= classDetail.getTerm()%></td>
+                   <td><%= classDetail.getBeginTime()%></td>
                    <td><%= classDetail.getTimes()%></td>
                    <td><%= classDetail.getCost()%></td>
-                   <td><button style="width:50px;" id="printbtu_<%=classDetail.getClassCode() %>" value="<%=classDetail.getClassCode() %>" type="button" class="btn btn-primary" data-toggle="button" onclick="printme(this.value)">打印</button></td>
+                   <%--<td><button style="width:50px;" id="printbtu_<%=classDetail.getClassCode() %>" value="<%=classDetail.getClassCode() %>" type="button" class="btn btn-primary" data-toggle="button" onclick="printme(this.value)">打印</button></td>--%>
                </tr>
             </tbody>
         </table>
@@ -125,7 +136,34 @@
             var LODOP;
             function printme(classCode)
             {
-                prn1_print(classCode);
+                var time=getNowFormatDate();
+                $("#printTime").html("打印时间："+time);
+                $.ajax({
+                    url: 'print/getRecord.do',
+                    type: 'POST', //GET
+                    async: true,    //或false,是否异步
+                    data: {
+                        classId: classCode,
+                        studentId: $("#stuId").val(),
+                        studentName: $("#stuName").val()
+                    },
+                    success: function (data) {
+                        if (data.status == "ture") {
+                            prn1_print(classCode)
+                            $.ajax({
+                                url: 'print/record.do',
+                                type: 'POST', //GET
+                                async: true,    //或false,是否异步
+                                data: {
+                                    classId: classCode,
+                                    studentId: $("#stuId").val(),
+                                    studentName: $("#stuName").val()
+                                },
+                            });
+                        }
+                    }}
+                    )
+
             }
             function prn1_print(classCode) {
                 CreateOneFormPage(classCode);
@@ -172,9 +210,10 @@
 
             </div>
             <span>**************************</span><br>
-            <label id="myprinttime"></label><br>
-            <span>**************************</span>
-
+           <label id="printTime"></label><br>
+            <label>打印次数：<%=classDetail.getPrintNum()%></label><br>
+            <span>**************************</span><br>
+             <label>开课三次后不能退费,敬请理解</label><br>
         </div>
 
         </div>
@@ -190,6 +229,7 @@
             <tr><td>费用</td><td><%= classDetail.getCost()%></td></tr>
         </div>
     </div>
+<div><a class="printBtu" id="print_id" onclick="printme('<%=classDetail.getClassCode() %>')"><img id="print_img" src="<%=path %>/static/img/printButton.png"></a></div>
     <a href="<%=basePath %>index.jsp" class="indexBtu"><img src="<%=path %>/static/img/trunIndex.png"></a>
 </div>
 <script>

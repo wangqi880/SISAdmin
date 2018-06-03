@@ -195,6 +195,9 @@ public class AnalysisUtil
 		List<ClassDetail> details = new ArrayList<>();
 		for(ClazzSearch search : searchs)
 		{
+			if(-1==DateUtil.compare_timestamp(search.getEndTime()) || !"报名进行中".equals(search.getFrontStatusName())){
+				 continue;
+			}
 			ClassDetail classDetail = new ClassDetail();
 			classDetail.setId(search.getId());
 			classDetail.setAge(search.getApplyLimit());
@@ -213,6 +216,13 @@ public class AnalysisUtil
 			classDetail.setAttitudinal(search.getAttitudes());
 			classDetail.setSemester(search.getTerm());
 			classDetail.setLevel(search.getDegree());
+			classDetail.setYear(search.getYear());
+			try {
+				String btime = DateUtil.getDateToStringFormat(String.valueOf(search.getBeginTime()), "yyyy-MM-dd");
+				classDetail.setBeginTime(btime);
+			}catch (Exception e){
+				classDetail.setBeginTime(String.valueOf(search.getBeginTime()));
+			}
 			details.add(classDetail);
 		}
 

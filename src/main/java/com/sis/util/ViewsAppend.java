@@ -95,4 +95,12 @@ public class ViewsAppend
 		show.put("status","SUCCESS");
 		return show;
 	}
+
+
+	public static String  getClassPlace(ScheduleTd td){
+			String sche = td.getSchedule();
+			String[] infos = sche.split(" ");
+			if(infos.length<2)return "";
+			return infos[2];
+	}
 }

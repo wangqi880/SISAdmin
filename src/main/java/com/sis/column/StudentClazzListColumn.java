@@ -34,6 +34,7 @@ public class StudentClazzListColumn
 	private String	applyStatusName;
 	private String	xzm;
 	private String clazzNo;
+	private String classPlace;
 
 	public String getClazzNo()
 	{
@@ -323,5 +324,13 @@ public class StudentClazzListColumn
 	public void setXzm(String xzm)
 	{
 		this.xzm = xzm;
+	}
+
+	public String getClassPlace() {
+		return classPlace;
+	}
+
+	public void setClassPlace(String classPlace) {
+		this.classPlace = classPlace;
 	}
 }

@@ -74,6 +74,7 @@ public class PayController {
 		//保存班级信息
 		ClassDetail classDetail = setClazzDetail(column);
 		session.setAttribute("jfdetail_List",classDetail);
+		session.setAttribute("reserveNo",phoneNumber);
 		SessionUtil.printSession(session);
 		return "SUCCESS";
 	}

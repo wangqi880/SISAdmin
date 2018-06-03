@@ -24,7 +24,12 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.beans.Encoder;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.*;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -773,11 +778,33 @@ public class AttendController
 		}
 	}
 
+	public  boolean isMessyCode(String str) {
+		for (int i = 0; i < str.length(); i++) {
+			char c = str.charAt(i);
+			// 当从Unicode编码向某个字符集转换时，如果在该字符集中没有对应的编码，则得到0x3f（即问号字符?）
+			//从其他字符集向Unicode编码转换时，如果这个二进制数在该字符集中没有标识任何的字符，则得到的结果是0xfffd
+			//System.out.println("--- " + (int) c);
+			if ((int) c == 0xfffd) {
+				// 存在乱码
+				//System.out.println("存在乱码 " + (int) c);
+				return true;
+			}
+		}
+		return false;
+	}
 
 	@RequestMapping("/getPrintInfo.do")
 	@ResponseBody
-	public Map<String,Object> getStudentClazzInfo(String studentId,String studentName,HttpSession session)
+	public Map<String,Object> getStudentClazzInfo(String studentId, HttpServletRequest request,HttpSession session)
 	{
+		String studentName=request.getParameter("studentName");
+		try {
+			studentName  = new String(studentName.getBytes("UTF-8"),"UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+
+
 		String url = Constants.StudentClazzListUrl;
 		Map<String,String> param = new HashMap<>();
 		param.put("siteId",Constants.SITE_ID);
@@ -832,7 +859,7 @@ public class AttendController
 					classDetail.setReserveNo(column.getReserveNo());
 					classDetail.setClassDate(column.getClassDate());
 					classDetail.setBeginTime(column.getBeginTime());
-					classDetail.setStatusName(studentName);
+					classDetail.setStudentName(studentName);
 					//根据学生id和classid获取总共打印次数
 					int num = printService.getAllPrintCount(studentId,column.getClazzNo());
 					classDetail.setPrintNum(num);
@@ -857,7 +884,7 @@ public class AttendController
 					classDetail.setReserveNo(column.getReserveNo());
 					classDetail.setClassDate(column.getClassDate());
 					classDetail.setBeginTime(column.getBeginTime());
-					classDetail.setStatusName(studentName);
+					classDetail.setStudentName(studentName);
 					//根据学生id和classid获取总共打印次数
 					int num = printService.getAllPrintCount(studentId,column.getClazzNo());
 					classDetail.setPrintNum(num);
@@ -867,6 +894,7 @@ public class AttendController
 
 
 		}
+
 		map.put("status","SUCCESS");
 		map.put("classinfo",list);
 		map.put("controlYear",controlYear);

@@ -5,7 +5,7 @@
   Time: 15:42
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="UTF-8" %>
 <%@include file="WEB-INF/views/common/taglibs.jsp"%>
 <%@ include file="WEB-INF/views/common/head.jsp" %>
 <!DOCTYPE html>
@@ -66,12 +66,12 @@
     </div>
     <%
         request.setCharacterEncoding("UTF-8");
-        String studentName = request.getParameter("studentName");
-        String  name="";
+        String name = request.getParameter("studentName");
+       /* String  name="";
         if(null!=studentName && (!"".equals(studentName))){
             byte[] b = studentName.getBytes("iso-8859-1");
               name = new String(b,"UTF-8");
-        }
+        }*/
        /* String name = request.getParameter("studentName");*/
     %>
     <input id="stuId" value="<%=request.getParameter("studentId") %>" hidden/>
@@ -126,7 +126,6 @@
         function printme(classCode)
         {
           //  alert($("#stuName").val())
-           alert($("#stuId").val());
             $.ajax({
                 url:'print/getRecord.do',
                 type:'POST', //GET
@@ -232,7 +231,7 @@
                     for(var i =0; i < classinfo.length;i++){
                         classId=classinfo[i].classCode;
                         var info = '<tr style="text-align:center">' +
-                            '<td style="text-align:center">'+$("#stuName").val()+'</td>' +
+                            '<td style="text-align:center">'+classinfo[i].studentName+'</td>' +
                             '<td style="text-align:center" class="classcode">'+classinfo[i].classCode+'</td>' +
                           '<td style="text-align:center">'+classinfo[i].className+'</td>' +
                            '<td style="text-align:center">'+classinfo[i].major+'</td>' +
@@ -253,7 +252,7 @@
                             '        <span>**************************</span>\n' +
                             '        <div class="section2">\n' +
                             '            <label>预约号：'+classinfo[i].reserveNo+'</label><br>\n' +
-                            '            <label>姓名：'+$("#stuName").val()+'</label><br>\n' +
+                            '            <label>姓名：'+classinfo[i].studentName+'</label><br>\n' +
                             '            <label>班级代码：'+classinfo[i].classCode+'</label><br>\n' +
                             '            <label>班级名称：'+classinfo[i].className+'</label><br>\n' +
                             '            <label>专业：'+classinfo[i].major+'</label><br>\n' +

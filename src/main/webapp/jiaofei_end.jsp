@@ -81,12 +81,12 @@
 <%
     ClassDetail classDetail = (ClassDetail)request.getSession().getAttribute("jf_stu_classInfo");
     request.setCharacterEncoding("UTF-8");
-    String studentName = request.getParameter("studentName");
-    String  name="";
+    String name = request.getParameter("studentName");
+   /* String  name="";
     if(null!=studentName && (!"".equals(studentName))){
         byte[] b = studentName.getBytes("iso-8859-1");
         name = new String(b,"UTF-8");
-    }
+    }*/
 %>
 <input id="stuId" value="<%=request.getParameter("studentId") %>" hidden/>
 <input id="stuName" value="<%=name %>" hidden/>

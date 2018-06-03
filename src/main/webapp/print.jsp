@@ -69,12 +69,11 @@
 
     <%
         request.setCharacterEncoding("UTF-8");
-        String studentName = request.getParameter("studentName");
-        String  name="";
-        if(null!= studentName && (!"".equals(studentName))){
+        String name = request.getParameter("studentName");
+       /* if(null!= studentName && (!"".equals(studentName))){
             byte[] b = studentName.getBytes("iso-8859-1");
               name = new String(b,"UTF-8");
-        }
+        }*/
 
 
     %>

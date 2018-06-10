@@ -415,8 +415,14 @@ public class AttendController
 		param.put("userMobile",phoneNumber);
 		param.put("appKey",Constants.StudentInfoAppKey);
 		String studentListInfo = HttpClientUtil.sendHttpPost(url,param);
-		if(StringUtils.isBlank(studentListInfo))
+		JSONObject jsonObject =  JSONObject.parseObject(studentListInfo);
+		String result="";
+		if(null!=jsonObject){
+			result = String.valueOf(jsonObject.get("ret"));
+		}
+		if(StringUtils.isBlank(studentListInfo) || "USER_NOT_EXIST".equals(result))
 		{
+
 			log.error("手机号码："+phoneNumber+"没查出学员信息");
 			SessionUtil.printSession(session);
 			return "false";

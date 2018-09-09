@@ -415,11 +415,15 @@ public class AttendController
 		param.put("userMobile",phoneNumber);
 		param.put("appKey",Constants.StudentInfoAppKey);
 		String studentListInfo = HttpClientUtil.sendHttpPost(url,param);
-		JSONObject jsonObject =  JSONObject.parseObject(studentListInfo);
+		Object obj = JSON.parse(studentListInfo);
 		String result="";
-		if(null!=jsonObject){
-			result = String.valueOf(jsonObject.get("ret"));
+		if(obj instanceof JSONObject){
+			JSONObject jsonObject =  JSONObject.parseObject(studentListInfo);
+			if(null!=jsonObject){
+				result = String.valueOf(jsonObject.get("ret"));
+			}
 		}
+
 		if(StringUtils.isBlank(studentListInfo) || "USER_NOT_EXIST".equals(result))
 		{
 
@@ -804,11 +808,14 @@ public class AttendController
 	public Map<String,Object> getStudentClazzInfo(String studentId, HttpServletRequest request,HttpSession session)
 	{
 		String studentName=request.getParameter("studentName");
-		try {
-			studentName  = new String(studentName.getBytes("UTF-8"),"UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
+		if(StringUtils.isNotEmpty(studentName)){
+			try {
+				studentName  = new String(studentName.getBytes("UTF-8"),"UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
 		}
+
 
 
 		String url = Constants.StudentClazzListUrl;

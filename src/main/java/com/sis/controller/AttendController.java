@@ -15,6 +15,10 @@ import com.sis.model.StudentInfo;
 import com.sis.service.ConfigService;
 import com.sis.service.PrintService;
 import com.sis.util.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,21 +26,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.beans.Encoder;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.util.*;
 
 /**
  * Created by 13046 on 2017/11/2.
  */
 @Controller
 @RequestMapping("/info")
+@Api(value = "专业相关接口",tags={"专业相关接口"} )
 public class AttendController
 {
 	private final static Logger log = LoggerFactory.getLogger(AttendController.class);
@@ -52,7 +55,12 @@ public class AttendController
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping("/majorDetail.do")
+	@RequestMapping(value = "/majorDetail.do",method = {RequestMethod.GET,RequestMethod.POST})
+	@ApiOperation(value = "展示专业小类",notes = "展示专业小类",response = Map.class)
+	@ApiImplicitParams({
+		@ApiImplicitParam(name = "area",value = "区域",dataType = "String"),
+			@ApiImplicitParam(name = "major",value = "专业",dataType = "String")
+	})
 	@ResponseBody
 	public Map<String,List<String>>  showMajorDetail (String area, String major,HttpSession session) {
 			area = ReplaceArea.getArea(area);
@@ -82,7 +90,11 @@ public class AttendController
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping(value="showClass",produces="application/json;charset=utf-8")
+	@ApiOperation(value = "展示区域下、专业下的所有班级",notes = "展示区域下、专业下的所有班级")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "major",value = "区域",dataType = "String")
+	})
+	@RequestMapping(value="showClass",produces="application/json;charset=utf-8",method = {RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
 	public String showClass(String major,HttpSession session){
 		List<ClassDetail> list = new ArrayList<>();
@@ -182,7 +194,11 @@ public class AttendController
 	 * 展示班级详细信息
 	 * @return
 	 */
-	@RequestMapping("/classDetail.do")
+	@ApiOperation(value = "展示班级详细信息",notes = "展示班级详细信息")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "classCode",value = "班级code",dataType = "String")
+	})
+	@RequestMapping(value = "/classDetail.do",method = {RequestMethod.GET,RequestMethod.POST})
 	private String getClassDetail(String classCode,HttpSession session){
 		List<ClassDetail> list = (List<ClassDetail>)session.getAttribute("classList");
 		if(CollectionUtils.isEmpty(list)){
@@ -259,7 +275,11 @@ public class AttendController
 		return table;
 	}*/
 
-	@RequestMapping(value = "/showSchedule.do",produces = "application/json;charset=utf-8")
+	@ApiOperation(value = "根据学员ID查询学员本学期课表",notes = "根据学员ID查询学员本学期课表")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "studentId",value = "学生id",dataType = "String")
+	})
+	@RequestMapping(value = "/showSchedule.do",produces = "application/json;charset=utf-8",method = {RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
 	private Map<String,Object> showSchedule(String studentId,HttpSession session){
 		//TODO 根据学员ID查询学员本学期课表（已缴费的课程）
@@ -312,7 +332,11 @@ public class AttendController
 	 * 获取验证码
 	 * @return
 	 */
-	@RequestMapping("/getPhoneCheckInfo.do")
+	@ApiOperation(value = "获取验证码",notes = "获取验证码")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "phoneNumber",value = "电话号码",dataType = "String")
+	})
+	@RequestMapping(value = "/getPhoneCheckInfo.do" ,method = {RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
 	private String getPhoneCheckInfo(String phoneNumber,HttpSession session){
 		//TODO  生成手机验证码
@@ -400,10 +424,15 @@ public class AttendController
 	}
 
 	/**
-	 * 获取验证码
+	 * 获取用户信息
 	 * @return
 	 */
-	@RequestMapping("/getAccountInfo.do")
+	@ApiOperation(value = "获取用户信息",notes = "获取用户信息")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "phoneNumber",value = "电话号码",dataType = "String"),
+			@ApiImplicitParam(name = "classCode",value = "班级code",dataType = "String")
+	})
+	@RequestMapping(value = "/getAccountInfo.do",method = {RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
 	private String getAccountInfo(String phoneNumber,String classCode,HttpSession session){
 		//TODO 通过手机号查询用户账号信息
@@ -472,7 +501,7 @@ public class AttendController
 	 * 比对验证码
 	 * @return
 	 */
-	@RequestMapping("/checkCode.do")
+	@RequestMapping(value = "/checkCode.do",method = {RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
 	private String checkCode(String phoneCode,String phoneNumber,String classCode,HttpSession session){
 		Map<String , Object> returnCode = new HashMap<>();
@@ -495,7 +524,13 @@ public class AttendController
 	 * 比对验证码
 	 * @return
 	 */
-	@RequestMapping("/checkCodeLogin.do")
+	@ApiOperation(value = "比对验证码",notes = "比对验证码")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "phoneCode",value = "验证码",dataType = "String"),
+			@ApiImplicitParam(name = "phoneNumber",value = "电话",dataType = "String"),
+			@ApiImplicitParam(name = "classCode",value = "classCode",dataType = "String")
+	})
+	@RequestMapping(value = "/checkCodeLogin.do",method = {RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
 	private String checkCodeLogin(String phoneCode,String phoneNumber,String classCode,HttpSession session){
 		Map<String , Object> returnCode = new HashMap<>();
@@ -516,9 +551,14 @@ public class AttendController
 
 	/**
 	 * 点击学员基本信息，展示学员详细信息以及报名班级信息
-	 * 
+	 *
 	 */
-	@RequestMapping("/getAttendInfo.do")
+	@ApiOperation(value = "点击学员基本信息，展示学员详细信息以及报名班级信息",notes = "点击学员基本信息，展示学员详细信息以及报名班级信息")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "classCode",value = "班级code",dataType = "String"),
+			@ApiImplicitParam(name = "idnumber",value = "学生id",dataType = "String")
+	})
+	@RequestMapping(value = "/getAttendInfo.do",method = {RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
 	public Map<String, Object> getAttendInfo(String classCode,String idnumber,HttpSession session){
 		log.info("==>班级代码:"+classCode+",学生ID:"+idnumber);
@@ -559,7 +599,11 @@ public class AttendController
 	 * 报名
 	 * @return
 	 */
-	@RequestMapping("/attend.do")
+	@ApiOperation(value = "报名",notes = "报名")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "studentId",value = "学生id",dataType = "String")
+	})
+	@RequestMapping(value = "/attend.do",method = {RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
 	public Map<String,String> attend(String studentId,HttpSession session) {
 		//报名信息
@@ -803,7 +847,11 @@ public class AttendController
 		return false;
 	}
 
-	@RequestMapping("/getPrintInfo.do")
+	@ApiOperation(value = "获取打印信息",notes = "获取打印信息")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "studentId",value = "学生id",dataType = "String")
+	})
+	@RequestMapping(value = "/getPrintInfo.do",method = {RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
 	public Map<String,Object> getStudentClazzInfo(String studentId, HttpServletRequest request,HttpSession session)
 	{

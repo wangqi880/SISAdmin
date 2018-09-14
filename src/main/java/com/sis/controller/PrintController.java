@@ -7,10 +7,15 @@ import com.sis.service.PrintService;
 import com.sis.util.CharUtils;
 import com.sis.util.ConfigUtil;
 import com.sis.util.DateUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.awt.print.*;
@@ -22,6 +27,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping ("/print")
+@Api(value = "打印相关接口",tags={"打印相关接口"} )
 public class PrintController {
 
     @Autowired
@@ -34,7 +40,13 @@ public class PrintController {
      * 查看是否有打印资格（是否达到最高打印次数，是否到达每日上限等）
      * @return
      */
-    @RequestMapping("/getRecord.do")
+    @ApiOperation(value = "查看是否有打印资格,是否达到最高打印次数，是否到达每日上限等",notes = "查看是否有打印资格")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "studentId",value = "学生id",dataType = "String"),
+            @ApiImplicitParam(name = "studentName",value = "学生名字",dataType = "String"),
+            @ApiImplicitParam(name = "classId",value = "课程id",dataType = "String")
+    })
+    @RequestMapping(value = "/getRecord.do",method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public Map<String,String> getPrintStatus(String studentId,String studentName, String classId){
         System.out.println("print-------->stuid:"+studentId+"---- name:"+studentName+"----classCode:"+classId);
@@ -73,7 +85,13 @@ public class PrintController {
     /**
      * 打印操作记录下来
      */
-    @RequestMapping("/record.do")
+    @ApiOperation(value = "打印操作记录下来",notes = "打印操作记录下来")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "studentId",value = "学生id",dataType = "String"),
+            @ApiImplicitParam(name = "studentName",value = "学生名字",dataType = "String"),
+            @ApiImplicitParam(name = "classId",value = "课程id",dataType = "String")
+    })
+    @RequestMapping(value = "/record.do",method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public void printRecord(String studentId,String studentName,String classId){
         System.out.println("print-------->stuid:"+studentId+"---- name:"+studentName+"----classCode:"+classId);

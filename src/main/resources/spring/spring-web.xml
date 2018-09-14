@@ -44,4 +44,9 @@
 			<bean class="com.sis.web.LoginInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
+
+	<!-- swagger -->
+	<bean class="com.sis.swagger.SwaggerConfig"></bean>
+	<mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/"/>
+	<mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
 </beans>

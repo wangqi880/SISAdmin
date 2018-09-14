@@ -1,9 +1,11 @@
 package com.sis.controller;
 
 import com.sis.util.HttpClientUtil;
+import io.swagger.annotations.Api;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +18,7 @@ public class StudentController {
      * 学生信息
      * @return
      */
+    @ApiIgnore
     @RequestMapping("/info")
     @ResponseBody
     public String getStudentInfo()
@@ -34,6 +37,7 @@ public class StudentController {
      * 学生报名班级列表
      * @return
      */
+    @ApiIgnore
     @RequestMapping("/clazzList")
     @ResponseBody
     public String getStudentClazzList()
@@ -53,6 +57,7 @@ public class StudentController {
      * 学生报名班级详情
      * @return
      */
+    @ApiIgnore
     @RequestMapping("/clazzView")
     @ResponseBody
     public String getStudentClazzView()

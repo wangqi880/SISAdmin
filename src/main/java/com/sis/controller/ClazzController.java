@@ -7,18 +7,25 @@ import com.sis.common.Constants;
 import com.sis.model.ClassDetail;
 import com.sis.util.AnalysisUtil;
 import com.sis.util.HttpClientUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Api(value = "课程相关接口",tags={"课程相关接口"} )
 @ Controller
 @ RequestMapping ("/clazz")
 public class ClazzController
@@ -29,7 +36,8 @@ public class ClazzController
 	 * 培训课程列表
 	 * @return
 	 */
-	@ RequestMapping ("/list")
+	@ApiOperation(value = "培训课程列表",notes = "培训课程列表",response = Map.class)
+	@ RequestMapping (value = "/list",method = {RequestMethod.GET,RequestMethod.POST})
 	@ ResponseBody
 	public String getClazzList()
 	{
@@ -44,6 +52,7 @@ public class ClazzController
 	 * 课程详情
 	 * @return
 	 */
+	@ApiIgnore
 	@ RequestMapping ("/view")
 	@ ResponseBody
 	public String getClazzView()
@@ -61,7 +70,11 @@ public class ClazzController
      * @param classNo
      * @return
      */
-    @RequestMapping("/classSearch.do")
+	@ApiOperation(value = "根据班级代码查询班级信息",notes = "根据班级代码查询班级信息",response = Map.class)
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "classNo",value = "班级code",dataType = "String")
+	})
+	@RequestMapping(value = "/classSearch.do",method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public JSONObject getClazzSearch(String classNo,HttpSession session)
     {
@@ -89,6 +102,7 @@ public class ClazzController
 	 * 班级信息页面跳转
 	 * @return
 	 */
+	@ApiIgnore
 	@ RequestMapping ("/classInfo.do")
 	public String classInfoView()
 	{

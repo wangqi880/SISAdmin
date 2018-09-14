@@ -10,11 +10,16 @@ import com.sis.model.ClassDetail;
 import com.sis.model.PayInfo;
 import com.sis.model.StudentInfo;
 import com.sis.util.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
@@ -26,11 +31,16 @@ import java.util.*;
  */
 @Controller
 @RequestMapping("pay")
+@Api(value = "支付相关接口",tags={"支付相关接口"} )
 public class PayController {
 
 	private static final Logger logger = Logger.getLogger(PayController.class);
 
-	@RequestMapping("/getBookingInfo.do")
+	@ApiOperation(value = "根据预约号查询报名信息",notes = "根据预约号查询报名信息",response = Map.class)
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "phoneNumber",value = "预约号",dataType = "String")
+	})
+	@RequestMapping(value = "/getBookingInfo.do",method = {RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
 	public  String getBookingInfo (String phoneNumber,HttpSession session) {
 		//TODO 根据预约号查询预约缴费信息
@@ -79,7 +89,11 @@ public class PayController {
 		return "SUCCESS";
 	}
 
-	@RequestMapping("/getKeyNoCode.do")
+	@ApiOperation(value = "根据支付类型获取二维码",notes = "根据支付类型获取二维码")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "payType",value = "支付类型",dataType = "String")
+	})
+	@RequestMapping(value = "/getKeyNoCode.do",method = {RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
 	public Map<String,String> getKeyNoCode(String payType,HttpSession session)
 	{
@@ -123,7 +137,11 @@ public class PayController {
 		return info;
 	}
 
-	@RequestMapping("/getKey.do")
+	@ApiOperation(value = "根据支付类型与预约号获取二维码",notes = "根据支付类型与预约号获取二维码")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "payType",value = "支付类型",dataType = "String")
+	})
+	@RequestMapping(value = "/getKey.do",method = {RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
 	public Map<String,String> pay(String payType,String reserveNo,HttpSession session)
 	{
@@ -271,7 +289,8 @@ public class PayController {
 
 	}
 
-	@RequestMapping("/getPayStatus")
+	@ApiOperation(value = "轮训接口查询支付状态状态",notes = "轮训接口查询支付状态状态")
+	@RequestMapping(value = "/getPayStatus",method = {RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
 	public String getPayStatus(HttpSession session)
 	{

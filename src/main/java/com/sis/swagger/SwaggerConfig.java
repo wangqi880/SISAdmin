@@ -29,7 +29,7 @@ public class SwaggerConfig {
     }
 
     private ApiInfo apiInfo() {
-        Contact contact = new Contact("查询机", "", "");
+        Contact contact = new Contact("成都智鸟信息技术有限公司", "", "444687196@qq.com");
         return new ApiInfoBuilder()
                 .title("青少年查询机接口")
                 .description("青少年查询机接口")
